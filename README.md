@@ -3,7 +3,7 @@ l’idée c'est  de construire une intelligence artificielle (un modèle) le for
 # 1)	Description des fichiers et répertoires de la repository
 
 
-2) Comment démarrer  la simulation ?
+# 2) Comment démarrer  la simulation ?
 
 L’idée ici c’est d’exécuter le modèle pré-entrainé, donc on démarre le simulateur de conduite automatique audacity et on fait le choix d’une  scène et on  appuie  sur le bouton Mode autonome. Ensuite, on  exécute le modèle comme suit:
 Python  drive.py model.h5
@@ -17,8 +17,8 @@ Le script drive.py c’est le script de test pour conduire la voiture en mode au
 
 
 
-ALGORITHMES et bibliothèques utilisées
-1)	Algorithmes 
+# 3)ALGORITHMES et bibliothèques utilisées
+# 	Algorithmes 
 Algorithme principal :
 On va créer un réseau de neurones  convolutionel qui lira les données  puis donne une sortie   qui va être la commande de pilotage. Le conducteur conduit et Machine va cloner  ce comportement  et on appelle ce processus : clonage comportemental.
 Algorithme de formation : 
@@ -53,44 +53,27 @@ Faire la prédiction et ensuite l’envoyer pour savoir la valeur de l’angle  
 Maintenant  on va effectuer de tenseurs  sur cette image nous devons donc insérer cette image dans notre réseau  pour la faire convertir l’image en un tableau on applique le preproccing on prédite l’angle de braquage a partir de notre modèle  si la vitesse est maximale on la change  et elle devient  une vitesse minimale  donc ca veut dire on veut ralentir et  si c’est pas le cas on va dire ici qu’on veut pas dépasser la vitesse maximale.
 Apres on peut envoyer le contrôle  en utilisant la fonction send_control  on a preprocessé l’image , on  a introduit dans notre modèle,  on trouve à la sortie  the steering angle et nous pouvons utiliser après pour envoyer ce contrôle directement au serveur  via la fonction send_control c’est comme un paquet  pour le serveur et le serveur lira cette information de manière a ce que la logique de gestion des événements soit sous le capot du simulateur et nous pouvons simplement l’envoyer via notre client .
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2)	Bibliothèques
+# Bibliothèques
 
 Avant de  commencer la programmation, on  a installé  l’environnement anaconda  et aussi  l’éditeur de texte Atom. Au lieu  d’installer manuellement les bibliothèques requises à l’aide de pip on a choisi de lancer cette commande dans l’anaconda Prompt et de cette façon on peut installer toutes les dépendances en une seule ligne du code   : 
 conda env create –f  environments.yml
-Les bibliothèques utilisées : 
-Bibliothèque	Rôle
-Pandas	analyse des données  créer, lire, mise à jour, effacer des data sets.
-Keras 	Librairie  d’apprentissage automatique  
-Model  checkpoint de  keras.callbacks	Pour les points du contrôle 
-Séquentiel de  keras .models 	Des piles linéaires des couches 
-Adam de keras.optimazers 	pour l’utilisation de la descente du gradient 
-Os 	Pour la lecture et l’écriture des  fichiers 
-Lambda, Conv2D, MaxPooling2D, Dropout, Dense, Flatten de keras.layers
-	Type des couches qu’on veut dans le modèle 
-INPUT_SHAPE, batch_generator de  utils 
-	Pour définir la forme d'entrée et générer des images d'entraînement en fonction des chemins d'image et des angles de direction
-Argparse	Pour les arguments des lignes de commande 
-Numpy 	Pour faire les matrices mathématiques 
-Base64	décodage des images de caméra
-socketio	serveur temps réel
-eventlet.wsgi	interface de passerelle de serveur Web
-load_model de  keras.modele 	Charger et enregistrer le modèle 
-Image de PIL	Manipulation d’image
-BytesIO de IO	Configuration entrée/sortie 
+Les bibliothèques utilisées et leur role : 
+Pandas: analyse des données  créer, lire, mise à jour, effacer des data sets.
+Keras : Librairie  d’apprentissage automatique  
+Model  checkpoint de  keras.callbacks:Pour les points du contrôle 
+Séquentiel de  keras .models :Des piles linéaires des couches 
+Adam de keras.optimazers :pour l’utilisation de la descente du gradient 
+Os :Pour la lecture et l’écriture des  fichiers 
+Lambda, Conv2D, MaxPooling2D, Dropout, Dense, Flatten de keras.layers: Type des couches qu’on veut dans le modèle 
+INPUT_SHAPE, batch_generator de  utils  :Pour définir la forme d'entrée et générer des images d'entraînement en fonction des chemins d'image et des angles de direction
+Argparse:Pour les arguments des lignes de commande 
+Numpy  :Pour faire les matrices mathématiques 
+Base64 :décodage des images de caméra
+socketio : serveur temps réel
+eventlet.wsgi : interface de passerelle de serveur Web
+load_model de  keras.modele : Charger et enregistrer le modèle 
+Image de PIL : Manipulation d’image
+BytesIO de IO : Configuration entrée/sortie 
 
 
 

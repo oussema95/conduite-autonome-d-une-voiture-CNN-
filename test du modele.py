@@ -79,14 +79,14 @@ if __name__ == '__main__':
     parser.add_argument(
         'model',
         type=str,
-        help='Path to model h5 file. Model should be on the same path.'
+        help='le modele h5'
     )
     parser.add_argument(
         'image_folder',
         type=str,
         nargs='?',
         default='',
-        help='Path to image folder. This is where the images from the run will be saved.'
+        help='ou on trouve les images'
     )
     args = parser.parse_args()
 
@@ -100,8 +100,8 @@ if __name__ == '__main__':
         else:
             shutil.rmtree(args.image_folder)
             os.makedirs(args.image_folder)
-        print("RECORDING THIS RUN ...")
+        print("recorder cette execution")
     else:
-        print("NOT RECORDING THIS RUN ...")
+        print("ne pas recorder cette execution ")
     app = socketio.Middleware(sio, app)
     eventlet.wsgi.server(eventlet.listen(('', 4567)), app)

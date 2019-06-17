@@ -62,7 +62,7 @@ Avant de  commencer la programmation, on  a installé  l’environnement anacond
 conda env create –f  environments.yml
 Les bibliothèques utilisées et leur role : 
 ![alt text](https://github.com/oussema95/conduite-autonome-d-une-voiture-CNN-/blob/master/rapport1.PNG)
-![alt text](https://github.com/oussema95/conduite-autonome-d-une-voiture-CNN-/blob/master/rapport2.PNG)
+![alt text](https://github.com/oussema95/conduite-autonome-d-une-voiture-CNN-/blob/master/rapport%202.PNG)
 
 
 

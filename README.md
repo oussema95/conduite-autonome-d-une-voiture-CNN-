@@ -59,22 +59,7 @@ Avant de  commencer la programmation, on  a installé  l’environnement anacond
 conda env create –f  environments.yml
 Les bibliothèques utilisées et leur role : 
 ![alt text](https://github.com/oussema95/conduite-autonome-d-une-voiture-CNN-/blob/master/rapport1.PNG)
-Pandas: analyse des données  créer, lire, mise à jour, effacer des data sets.
-Keras : Librairie  d’apprentissage automatique  
-Model  checkpoint de  keras.callbacks:Pour les points du contrôle 
-Séquentiel de  keras .models :Des piles linéaires des couches 
-Adam de keras.optimazers :pour l’utilisation de la descente du gradient 
-Os :Pour la lecture et l’écriture des  fichiers 
-Lambda, Conv2D, MaxPooling2D, Dropout, Dense, Flatten de keras.layers: Type des couches qu’on veut dans le modèle 
-INPUT_SHAPE, batch_generator de  utils  :Pour définir la forme d'entrée et générer des images d'entraînement en fonction des chemins d'image et des angles de direction
-Argparse:Pour les arguments des lignes de commande 
-Numpy  :Pour faire les matrices mathématiques 
-Base64 :décodage des images de caméra
-socketio : serveur temps réel
-eventlet.wsgi : interface de passerelle de serveur Web
-load_model de  keras.modele : Charger et enregistrer le modèle 
-Image de PIL : Manipulation d’image
-BytesIO de IO : Configuration entrée/sortie 
+![alt text](https://github.com/oussema95/conduite-autonome-d-une-voiture-CNN-/blob/master/rapport2.PNG)
 
 
 

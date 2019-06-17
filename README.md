@@ -58,7 +58,7 @@ Apres on peut envoyer le contrôle  en utilisant la fonction send_control  on a 
 Avant de  commencer la programmation, on  a installé  l’environnement anaconda  et aussi  l’éditeur de texte Atom. Au lieu  d’installer manuellement les bibliothèques requises à l’aide de pip on a choisi de lancer cette commande dans l’anaconda Prompt et de cette façon on peut installer toutes les dépendances en une seule ligne du code   : 
 conda env create –f  environments.yml
 Les bibliothèques utilisées et leur role : 
-![alt text] (https://github.com/oussema95/conduite-autonome-d-une-voiture-CNN-/blob/master/rapport1.PNG)
+![alt text](https://github.com/oussema95/conduite-autonome-d-une-voiture-CNN-/blob/master/rapport1.PNG)
 Pandas: analyse des données  créer, lire, mise à jour, effacer des data sets.
 Keras : Librairie  d’apprentissage automatique  
 Model  checkpoint de  keras.callbacks:Pour les points du contrôle 

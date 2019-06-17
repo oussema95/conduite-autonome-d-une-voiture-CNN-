@@ -69,7 +69,7 @@ def main():
     """
     validation et entrainement du modele
     """
-    parser = argparse.ArgumentParser(description='Behavioral Cloning Training Program')
+    parser = argparse.ArgumentParser(description='le programme du clonage du comportement ')
     parser.add_argument('-d', help='data directory',        dest='data_dir',          type=str,   default='data')
     parser.add_argument('-t', help='test size fraction',    dest='test_size',         type=float, default=0.2)
     parser.add_argument('-k', help='drop out probability',  dest='keep_prob',         type=float, default=0.5)

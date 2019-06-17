@@ -1,6 +1,9 @@
 # conduite-autonome-d-une-voiture-CNN-
 l’idée c'est  de construire une intelligence artificielle (un modèle) le former  et après on va tester ce modèle  afin  de simuler une voiture dans le mode autonome d'AUDACITY
 # 1)	Description des fichiers et répertoires de la repository
+dans la repository on trouve le fichier python construction-formation-modele.py dans lequel on trouve  le code du construction du modele  basé  sur les reseaux de neurones convolutifs insipiré de NVIDIA et on trouve comment  on forme le modele afin de l'utiliser apres dans la simulation .
+on trouve aussi le fichier python test du modele dans lequel on va charger le modele et on va etablir  une communication entre le serveur (le simulateur) et  les clients (les scripts construction-formation-modele et test du modele .
+on trouve aussi dans la repository  le fichier read.md qui explique comment on demarre la simulation , aussi  precise  les algorithmes les bibliotheques utilisées au cours du projet et bien sur on trouve aussi la description des fichiers crees et le repertoire de la repository .
 
 
 # 2) Comment démarrer  la simulation ?

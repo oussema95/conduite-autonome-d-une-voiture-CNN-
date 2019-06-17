@@ -22,13 +22,12 @@ Le script drive.py c’est le script de test pour conduire la voiture en mode au
 
 # 3)ALGORITHMES et bibliothèques utilisées
 # 	Algorithmes 
-Algorithme principal :
+# Algorithme principal :
 On va créer un réseau de neurones  convolutionel qui lira les données  puis donne une sortie   qui va être la commande de pilotage. Le conducteur conduit et Machine va cloner  ce comportement  et on appelle ce processus : clonage comportemental.
-Algorithme de formation : 
 Dans la phase de formation : (script de formation)  (model.py) 
 La 1ere étape c’est de  charger le fichier.csv  
 On fait entrer  les entrées X  et  Y va représenter  les données de sortie  qui seront notre commande de pilotage .On va essayer de  trouver la correspondance entre les deux (X et Y) c’est un apprentissage supervisé =>  lorsque on trouve  la correspondance entre les deux =>  on peut sortir le  prédictive output label après on peut  scinder les données de formation et de test 80 pourcent training et 20 pourcent de test  et puis nous avons le code pour construire notre modèle et ensuite la formation du modèle.
-Algorithme  de construction du modèle : 
+# Algorithme  de construction du modèle : 
 On  veut que notre première couche soit une couche de normalisation d’image en utilisant la fonction lambda pour  éviter les saturations et  améliorer les fonctionnements du gradient parce-que les images  peuvent être un peu  vague aussi les valeurs de correction de couleurs peuvent être fausses et donnent des résultats fausses.
 	On veut  dire  formater ou rémoduler ces valeurs  de tenseurs d’image en valeurs qui nous donnent  des bonnes prévisions 
 Maintenant on va faire des couches convolutifs : la premier va avoir un filtre de taille 24, une convolution 5by5 après on met une fonction d’activation ELU : unités linéaire exponentielle et nous allons sous échantillonner deux par deux parce que c’est la longueur de nos pas => elle s’occupe  du problème du gradient en voie de disparition => on va faire  5 couches. 
@@ -37,20 +36,17 @@ Chacun des couches va créer des filtres  de plus en plus abstraites , ils comme
 Et à la fin on retourne le modèle  donc ca va être comme un triangle  en termes de nombres,
  les matrices qui propagent dans notre réseau matrice avec  indice 10 après   avec un indice  5 après une matrice avec  2 indices après une   matrice avec un indice =>  c’est notre output.
  Le black box  de neural network   on ne connait pas ou  une feature commence  et  ou une autre se termine  de son emplacement  dans cette abstraction mais on sait qu’il ya une certaine  connectivité.
-Algorithme de Formation du modèle : 
+# Algorithme de Formation du modèle : 
 On définit  le modèle  et on l’enregistre  dans un check point il va  être modélisé donc on va dire mode automatique après on veut dire qu’on veut enregistrer le meilleur modèle.
 Aussi  on ajoute la fonction du quadratique  erreur  qui va  donner une prédictive angle de braquage et puis on a une réelle   angle de braquage du simulateur non-autonome et on veut trouver une différence entre les deux  donc  on mets  la différence aux carrés et  et puis on somme  les différences après on divise par leur nombre on utilise  après l’optimiseur d’atomes  qui est la descente du gradient  après la compilation on peut générer des données. On utilise le générateur d’ajustement real time  data argumentation sur les images sur le cpu en parallèle.
 => On génère des lots de données à partir de nos données de formation.
-Algorithme du test : 
+# Algorithme du test : 
 Il s’agit du principe  serveur-client, ça veut dire que le simulateur c’est le serveur et les clients  sont les scripts que nous avons écrit.
-INTIALISATION : 
+# INTIALISATION : 
 On commence par initialiser notre serveur, il s’agira d’un serveur de type  io et on utilise flask  pour faire ça on initialise notre modèle et le taux d’image aussi  nous allons définir  une vitesse maximale et minimale pour notre voiture autonome 10 miles et   25 miles à l’heure et on définit une limite de vitesse 
- MAIN FONCTION : 
+# MAIN FONCTION : 
 On charge le modèle et  on indique ou se trouve .Le middelware qui va permettre à notre client de communiquer avec le serveur après nous allons déployer le serveur wsGi . on ne  va pas coder la partie serveur  et on va coder la partie client  il ya d’autres façon mais c’est la façon la plus simple  , 
-
-
-
-FONCTION TELEMETRY : 
+# FONCTION TELEMETRY : 
 Faire la prédiction et ensuite l’envoyer pour savoir la valeur de l’angle  de braquage  puis on envoie au serveur nous allons donc intégrer  ça dans nos données.
 => on veut ces valeurs (throttle, angle de braquage)  pour les manipuler et les transformer en une valeur scalaire qui indiquera à notre voiture ou aller .
 Maintenant  on va effectuer de tenseurs  sur cette image nous devons donc insérer cette image dans notre réseau  pour la faire convertir l’image en un tableau on applique le preproccing on prédite l’angle de braquage a partir de notre modèle  si la vitesse est maximale on la change  et elle devient  une vitesse minimale  donc ca veut dire on veut ralentir et  si c’est pas le cas on va dire ici qu’on veut pas dépasser la vitesse maximale.

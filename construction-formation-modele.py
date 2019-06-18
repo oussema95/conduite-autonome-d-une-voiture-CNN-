@@ -24,7 +24,7 @@ def load_data(args):
 
 def build_model(args):
     """
-    le modele  NVIDIA  a ete utilisé  ici on trouve la construction du modele 
+    CNN 
 
     """
     model = Sequential()
@@ -47,7 +47,7 @@ def build_model(args):
 
 def train_model(model, args, X_train, X_valid, y_train, y_valid):
     """
-    Train the model
+    entrainer le model
     """
 
     checkpoint = ModelCheckpoint('model-{epoch:03d}.h5',monitor='val_loss',verbose=0,save_best_only=args.save_best_only,mode='auto')

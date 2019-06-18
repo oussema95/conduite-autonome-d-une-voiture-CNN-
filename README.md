@@ -52,7 +52,7 @@ on Bascule l'image au hasard à gauche et à droite et on  ajuste l'angle de bra
 
 
 # Algorithme principal :
-On va créer un réseau de neurones  convolutionel qui lira les données  puis donne une sortie   qui va être la commande de pilotage. Le conducteur conduit et Machine va cloner  ce comportement  et on appelle ce processus : clonage comportemental.
+On va créer un réseau de neurones  convolutionel CNN inspiré de NVIDIA qui lira les données  puis donne une sortie   qui va être la commande de pilotage. Le conducteur conduit et Machine va cloner  ce comportement  et on appelle ce processus : clonage comportemental.
 Dans la phase de formation : (script de formation)  (model.py) 
 La 1ere étape c’est de  charger le fichier.csv  
 On fait entrer  les entrées X  et  Y va représenter  les données de sortie  qui seront notre commande de pilotage .On va essayer de  trouver la correspondance entre les deux (X et Y) c’est un apprentissage supervisé =>  lorsque on trouve  la correspondance entre les deux =>  on peut sortir le  prédictive output label après on peut  scinder les données de formation et de test 80 pourcent training et 20 pourcent de test  et puis nous avons le code pour construire notre modèle et ensuite la formation du modèle.

@@ -5,6 +5,15 @@ dans la repository on trouve le fichier preproccessing-augmentation-image dans l
 on trouve aussi le fichier python test du modele dans lequel on va charger le modele et on va etablir  une communication entre le serveur (le simulateur) et  les clients (les scripts construction-formation-modele et test du modele .
 on trouve aussi dans la repository  le fichier read.md qui explique comment on demarre la simulation , aussi  precise  les algorithmes les bibliotheques utilisées au cours du projet et bien sur on trouve aussi la description des fichiers crees et le repertoire de la repository .
 
+preproccessing-augmentation-image.py
+
+construction-formation-modele.py
+
+test.py
+
+README.md
+
+
 
 # 2) Comment démarrer  la simulation ?
 

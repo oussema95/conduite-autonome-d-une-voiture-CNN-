@@ -22,6 +22,17 @@ Le script drive.py c’est le script de test pour conduire la voiture en mode au
 
 # 3)ALGORITHMES et bibliothèques utilisées
 # 	Algorithmes 
+# preprocessing   des images : 
+afin de pouvoir conserver simultanément plus d’images en mémoire et d’accélérer la formation, qui serait extrêmement lente sur les images de taille normale, on reduire la taille de l'image .
+On Recadre  l'image dans le sens on enleve le ciel en haut et l'avant de la voiture en bas  
+on fait la conversion RGB  to  YUV parceque le modele NVIDIA demande cette conversion .
+on combine le redimensionnement + recadrement+conversion dans une seule fonction 
+# augmentation  des images : 
+on Bascule l'image au hasard à gauche et à droite et on  ajuste l'angle de braquage et on décale  l'image horizontalement et verticalement  parceque on ne veut pas avoir des angles de braquages negatifs.
+
+# Génération d’une image augmentée 
+
+
 # Algorithme principal :
 On va créer un réseau de neurones  convolutionel qui lira les données  puis donne une sortie   qui va être la commande de pilotage. Le conducteur conduit et Machine va cloner  ce comportement  et on appelle ce processus : clonage comportemental.
 Dans la phase de formation : (script de formation)  (model.py) 

@@ -23,7 +23,7 @@ def crop(image):
 
 def resize(image):
     """
-    Resize the image to the input shape used by the network model
+    Redimonsionner l'image
     """
     return cv2.resize(image, (IMAGE_WIDTH, IMAGE_HEIGHT), cv2.INTER_AREA)
 
@@ -91,12 +91,10 @@ def random_shadow(image):
 
     mask = np.zeros_like(image[:, :, 1])
     mask[(ym - y1) * (x2 - x1) - (y2 - y1) * (xm - x1) > 0] = 1
-
-    # choose which side should have shadow and adjust saturation
     cond = mask == np.random.randint(2)
     s_ratio = np.random.uniform(low=0.2, high=0.5)
 
-    # adjust Saturation in HLS(Hue, Light, Saturation)
+    
     hls = cv2.cvtColor(image, cv2.COLOR_RGB2HLS)
     hls[:, :, 1][cond] = hls[:, :, 1][cond] * s_ratio
     return cv2.cvtColor(hls, cv2.COLOR_HLS2RGB)
@@ -106,7 +104,6 @@ def random_brightness(image):
     """
     ajuster la lumuniosité de l'image
     """
-    # HSV (Hue, Saturation, Value) is also called HSB ('B' for Brightness).
     hsv = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
     ratio = 1.0 + 0.4 * (np.random.rand() - 0.5)
     hsv[:,:,2] =  hsv[:,:,2] * ratio
@@ -136,12 +133,12 @@ def batch_generator(data_dir, image_paths, steering_angles, batch_size, is_train
         for index in np.random.permutation(image_paths.shape[0]):
             center, left, right = image_paths[index]
             steering_angle = steering_angles[index]
-            # argumentation
+       
             if is_training and np.random.rand() < 0.6:
                 image, steering_angle = augument(data_dir, center, left, right, steering_angle)
             else:
                 image = load_image(data_dir, center) 
-            # add the image and steering angle to the batch
+           
             images[i] = preprocess(image)
             steers[i] = steering_angle
             i += 1

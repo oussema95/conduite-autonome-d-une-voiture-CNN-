@@ -9,9 +9,11 @@ preproccessing-augmentation-image.py
 
 construction-formation-modele.py
 
-test.py
+test du modele .py
 
 README.md
+
+driving_log.csv
 
 
 

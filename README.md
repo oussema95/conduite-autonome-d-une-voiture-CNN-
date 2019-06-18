@@ -9,10 +9,17 @@ on trouve aussi dans la repository  le fichier read.md qui explique comment on d
 # 2) Comment démarrer  la simulation ?
 
 L’idée ici c’est d’exécuter le modèle pré-entrainé, donc on démarre le simulateur de conduite automatique audacity et on fait le choix d’une  scène et on  appuie  sur le bouton Mode autonome. Ensuite, on  exécute le modèle comme suit:
+
+
 Python  drive.py model.h5
+
+
 Avec model.h5 c’est le fichier qui contient   notre  réseau de neurones de convolution formés.
 On a besoin bien sur du dossier qui contient les images d’apprentissage 
+
 Python model.py 
+
+
  et cela générera un fichier à model-<epoch>.h5
 Le script drive.py c’est le script de test pour conduire la voiture en mode autonome   qui représente le client  et le  simulateur représente  le serveur et ce script  prend en charge un flux constant d'images, les manipule (redimensionnement et découpage) dans la forme d'entrée du modèle, puis transmet la matrice d'images transformées au modèle, qui fait la prédiction d’un angle de braquage approprié en fonction de l'image. L'angle de braquage est ensuite transmis à la voiture en tant que commande et la voiture se guide en conséquence. La voiture  autonome parcourt ainsi le parcours en émettant constamment des images et en recevant les angles de braquage. On espère bien sur que le modèle aura été suffisamment entraîné pour que les angles de direction qu’il reçoit permettent au véhicule de rouler en toute sécurité au milieu de la voie et de ne pas dériver sur la route ou faire autre chose qui serait considéré dangereux.
 

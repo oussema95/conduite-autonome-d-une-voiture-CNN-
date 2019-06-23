@@ -1,75 +1,76 @@
-import cv2, os
 import numpy as np
 import matplotlib.image as mpimg
+import cv2, os
 
 
-IMAGE_HEIGHT, IMAGE_WIDTH, IMAGE_CHANNELS = 66, 200, 3
-INPUT_SHAPE = (IMAGE_HEIGHT, IMAGE_WIDTH, IMAGE_CHANNELS)
+
+IMAGE_hauteur, IMAGE_largeur, IMAGE_canal = 70, 330, 7
+INPUT_SHAPE = (IMAGE_hauteur, IMAGE_largeur, IMAGE_canal)
 
 
-def load_image(data_dir, image_file):
+def chargement_image(data_dir, image_file):
     """
-    charger les image RGB du file 
+    charger les image RGB du file
     """
     return mpimg.imread(os.path.join(data_dir, image_file.strip()))
 
 
-def crop(image):
+def suppression(image):
     """
     supprimer le ciel  et l'avant les arbres et le capot de la voiture en bas
     """
     return image[60:-25, :, :]
 
 
-def resize(image):
+def redimonsionner(image):
     """
-    Redimonsionner l'image
+    redimonsionner l'image
     """
     return cv2.resize(image, (IMAGE_WIDTH, IMAGE_HEIGHT), cv2.INTER_AREA)
 
 
-def rgb2yuv(image):
+def conversionrgbyuv(image):
     """
-    Conversion RGB  à YUV 
+    Conversion RGB  à YUV
     """
     return cv2.cvtColor(image, cv2.COLOR_RGB2YUV)
 
 
-def preprocess(image):
+def preprocessing(image):
     """
-    Combiner les fonctions  de preprocessing en une seule fonction 
+    Combiner les fonctions  de preprocessing en une seule fonction
     """
-    image = crop(image)
-    image = resize(image)
-    image = rgb2yuv(image)
+    image = suppression(image)
+    image = redimonsionner(image)
+    image = conversionrgbyuv(image)
     return image
 
 
-def choose_image(data_dir, center, left, right, steering_angle):
+def choisir_image(data_dir, center, gauche, droite, angle_direction):
     """
     choix d'une image et ajustement de l'angle de braquage
     """
     choice = np.random.choice(3)
     if choice == 0:
-        return load_image(data_dir, left), steering_angle + 0.2
+        return chargement_image(data_dir, gauche), angle_direction + 0.7
     elif choice == 1:
-        return load_image(data_dir, right), steering_angle - 0.2
-    return load_image(data_dir, center), steering_angle
+        return chargement_image(data_dir, droite), angle_direction - 0.7
+    return chargement_image(data_dir, center), angle_direction
 
 
-def random_flip(image, steering_angle):
+def aleatoire(image, angle_direction):
     """
-    decalage des images 
+    decalage des images
     """
     if np.random.rand() < 0.5:
         image = cv2.flip(image, 1)
-        steering_angle = -steering_angle
-    return image, steering_angle
+        angle_direction = -angle_direction
+    return image, angle_direction
 
 
-def random_translate(image, steering_angle, range_x, range_y):
+def translation(image, angle_direction, range_x, range_y):
     """
-    basculement des images 
+    basculement des images
     """
     trans_x = range_x * (np.random.rand() - 0.5)
     trans_y = range_y * (np.random.rand() - 0.5)
@@ -80,67 +81,65 @@ def random_translate(image, steering_angle, range_x, range_y):
     return image, steering_angle
 
 
-def random_shadow(image):
+def obscurité(image):
     """
-    reglages du niveau  de  lumiere dans l'image 
+    reglages du niveau  de  lumiere dans l'image
     """
-    
-    x1, y1 = IMAGE_WIDTH * np.random.rand(), 0
-    x2, y2 = IMAGE_WIDTH * np.random.rand(), IMAGE_HEIGHT
-    xm, ym = np.mgrid[0:IMAGE_HEIGHT, 0:IMAGE_WIDTH]
+
+    x1, y1 = IMAGE_largeur * np.random.rand(), 0
+    x2, y2 = IMAGE_largeur * np.random.rand(), IMAGE_hauteur
+    xm, ym = np.mgrid[0:IMAGE_largeur, 0:IMAGE_hauteur]
 
     mask = np.zeros_like(image[:, :, 1])
     mask[(ym - y1) * (x2 - x1) - (y2 - y1) * (xm - x1) > 0] = 1
+
     cond = mask == np.random.randint(2)
     s_ratio = np.random.uniform(low=0.2, high=0.5)
-
-    
     hls = cv2.cvtColor(image, cv2.COLOR_RGB2HLS)
     hls[:, :, 1][cond] = hls[:, :, 1][cond] * s_ratio
     return cv2.cvtColor(hls, cv2.COLOR_HLS2RGB)
 
 
-def random_brightness(image):
+def brillance(image):
     """
     ajuster la lumuniosité de l'image
     """
     hsv = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
-    ratio = 1.0 + 0.4 * (np.random.rand() - 0.5)
-    hsv[:,:,2] =  hsv[:,:,2] * ratio
+    ratio = 3.0 + 0.8 * (np.random.rand() - 0.5)
+    hsv[:,:,3] =  hsv[:,:,5] * ratio
     return cv2.cvtColor(hsv, cv2.COLOR_HSV2RGB)
 
 
-def augument(data_dir, center, left, right, steering_angle, range_x=100, range_y=10):
+def augument(data_dir, center, gauche, droite, angle_direction, range_x=100, range_y=10):
     """
 generer une image augementé avec une angle de braquage
     """
-    image, steering_angle = choose_image(data_dir, center, left, right, steering_angle)
-    image, steering_angle = random_flip(image, steering_angle)
-    image, steering_angle = random_translate(image, steering_angle, range_x, range_y)
-    image = random_shadow(image)
-    image = random_brightness(image)
-    return image, steering_angle
+    image, angle_direction = choisir_image(data_dir, center, gauche, droite, angle_direction)
+    image, angle_direction = random_flip(image, steering_angle)
+    image, angle_direction = translation(image, angle_direction, range_x, range_y)
+    image = obscurité(image)
+    image = brillance(image)
+    return image, angle_direction
 
 
-def batch_generator(data_dir, image_paths, steering_angles, batch_size, is_training):
+def batch_generator(data_dir, image_paths, angle_direction, batch_size, is_training):
     """
-    generation  de l'image pour l'entrainement 
+    generation  de l'image pour l'entrainement
     """
-    images = np.empty([batch_size, IMAGE_HEIGHT, IMAGE_WIDTH, IMAGE_CHANNELS])
+    images = np.empty([batch_size, IMAGE_hauteur, IMAGE_largeur, IMAGE_canal])
     steers = np.empty(batch_size)
     while True:
         i = 0
         for index in np.random.permutation(image_paths.shape[0]):
-            center, left, right = image_paths[index]
-            steering_angle = steering_angles[index]
-       
-            if is_training and np.random.rand() < 0.6:
-                image, steering_angle = augument(data_dir, center, left, right, steering_angle)
+            center, gauche, droite = image_paths[index]
+            angle_direction = angle_direction[index]
+        
+            if is_training and np.random.rand() < 0.8:
+                image, angle_direction = augument(data_dir, center,gauche, droite, angle_direction)
             else:
-                image = load_image(data_dir, center) 
-           
+                image = chargement_image(data_dir, centre)
             images[i] = preprocess(image)
-            steers[i] = steering_angle
+            steers[i] = angle_direction
             i += 1
             if i == batch_size:
                 break

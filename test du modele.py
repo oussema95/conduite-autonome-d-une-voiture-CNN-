@@ -64,7 +64,7 @@ def connect(sid, environ):
     send_control(0, 0)
 
 
-def send_control(angle_direction, throttle):
+def envoie_controle(angle_direction, throttle):
     sio.emit(
         "steer",
         data={

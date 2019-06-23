@@ -12,7 +12,7 @@ import os
 np.random.seed(0)
 
 
-def load_data(args):
+def chargement_data(args):
     """
     lire le fichier csv   et preciser les entrees  sorties
     """
@@ -20,7 +20,7 @@ def load_data(args):
     X = data_df[['center', 'gauche', 'droite']].values
     y = data_df['steering'].values
     X_t, X_v, y_t, y_v = train_test_split(X, y, test_size=args.test_size, random_state=0)
-    return X_train, X_valid, y_train, y_valid
+    return X_t, X_v, y_t, y_v
 
 
 def constuction_modele(args):

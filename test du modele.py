@@ -91,7 +91,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     #charger le modele
-    model = load_model(args.model)
+    model = chargement_model(args.model)
 
     if args.image_folder != '':
         if not os.path.exists(args.image_folder):

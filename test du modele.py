@@ -94,7 +94,6 @@ if __name__ == '__main__':
     model = load_model(args.model)
 
     if args.image_folder != '':
-        print("Creating image folder at {}".format(args.image_folder))
         if not os.path.exists(args.image_folder):
             os.makedirs(args.image_folder)
         else:

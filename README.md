@@ -52,6 +52,8 @@ on Bascule l'image au hasard à gauche et à droite et on  ajuste l'angle de bra
 
 
 # Algorithme principal :
+la figure 1 montre les entrees/sorties de notre intelligence artficielle . 
+![alt text](https://github.com/oussema95/conduite-autonome-d-une-voiture-CNN-/blob/master/entree%20sortie.PNG)
 On va créer un réseau de neurones  convolutionel CNN inspiré de NVIDIA (par regression) qui lira les données  puis donne une sortie   qui va être la commande de pilotage. Le conducteur conduit et Machine va cloner  ce comportement  et on appelle ce processus : clonage comportemental.
 Dans la phase de formation : (script de formation)  (model.py) 
 La 1ere étape c’est de  charger le fichier.csv  
@@ -65,12 +67,16 @@ Chacun des couches va créer des filtres  de plus en plus abstraites , ils comme
 Et à la fin on retourne le modèle  donc ca va être comme un triangle  en termes de nombres,
  les matrices qui propagent dans notre réseau matrice avec  indice 10 après   avec un indice  5 après une matrice avec  2 indices après une   matrice avec un indice =>  c’est notre output.
  Le black box  de neural network   on ne connait pas ou  une feature commence  et  ou une autre se termine  de son emplacement  dans cette abstraction mais on sait qu’il ya une certaine  connectivité.
+ la figure 2 presente le systeme des couches  qu'on les trouve dans le modele CNN .
+![alt text](https://github.com/oussema95/conduite-autonome-d-une-voiture-CNN-/blob/master/machine.PNG)
 # Algorithme de Formation du modèle : 
 On définit  le modèle  et on l’enregistre  dans un check point il va  être modélisé donc on va dire mode automatique après on veut dire qu’on veut enregistrer le meilleur modèle.
 Aussi  on ajoute la fonction du quadratique  erreur  qui va  donner une prédictive angle de braquage et puis on a une réelle   angle de braquage du simulateur non-autonome et on veut trouver une différence entre les deux  donc  on mets  la différence aux carrés et  et puis on somme  les différences après on divise par leur nombre on utilise  après l’optimiseur d’atomes  qui est la descente du gradient  après la compilation on peut générer des données. On utilise le générateur d’ajustement real time  data argumentation sur les images sur le cpu en parallèle.
 => On génère des lots de données à partir de nos données de formation.
 # Algorithme du test : 
 Il s’agit du principe  serveur-client, ça veut dire que le simulateur c’est le serveur et les clients  sont les scripts que nous avons écrit.
+la figure 3 illustre ce prinicpe . 
+![alt text](https://github.com/oussema95/conduite-autonome-d-une-voiture-CNN-/blob/master/test.PNG)
 # INTIALISATION : 
 On commence par initialiser notre serveur, il s’agira d’un serveur de type  io et on utilise flask  pour faire ça on initialise notre modèle et le taux d’image aussi  nous allons définir  une vitesse maximale et minimale pour notre voiture autonome 10 miles et   25 miles à l’heure et on définit une limite de vitesse 
 # MAIN FONCTION : 
@@ -86,6 +92,7 @@ Apres on peut envoyer le contrôle  en utilisant la fonction send_control  on a 
 Avant de  commencer la programmation, on  a installé  l’environnement anaconda  et aussi  l’éditeur de texte Atom. Au lieu  d’installer manuellement les bibliothèques requises à l’aide de pip on a choisi de lancer cette commande dans l’anaconda Prompt et de cette façon on peut installer toutes les dépendances en une seule ligne du code   : 
 conda env create –f  environments.yml
 Les bibliothèques utilisées et leur role : 
+la figure 4 montre les differentes bibliotheques que j'ai utilisé .
 
 ![alt text](https://github.com/oussema95/conduite-autonome-d-une-voiture-CNN-/blob/master/rapport1.PNG)
 ![alt text](https://github.com/oussema95/conduite-autonome-d-une-voiture-CNN-/blob/master/rapport%202.PNG)

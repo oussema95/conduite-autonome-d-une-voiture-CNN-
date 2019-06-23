@@ -81,7 +81,7 @@ la figure 3 illustre ce prinicpe .
 On commence par initialiser notre serveur, il s’agira d’un serveur de type  io et on utilise flask  pour faire ça on initialise notre modèle et le taux d’image aussi  nous allons définir  une vitesse maximale et minimale pour notre voiture autonome 10 miles et   25 miles à l’heure et on définit une limite de vitesse 
 # MAIN FONCTION : 
 On charge le modèle et  on indique ou se trouve .Le middelware qui va permettre à notre client de communiquer avec le serveur après nous allons déployer le serveur wsGi . on ne  va pas coder la partie serveur  et on va coder la partie client  il ya d’autres façon mais c’est la façon la plus simple  , 
-# FONCTION TELEMETRY : 
+# FONCTION mesureàdistance : 
 Faire la prédiction et ensuite l’envoyer pour savoir la valeur de l’angle  de braquage  puis on envoie au serveur nous allons donc intégrer  ça dans nos données.
 => on veut ces valeurs (throttle, angle de braquage)  pour les manipuler et les transformer en une valeur scalaire qui indiquera à notre voiture ou aller .
 Maintenant  on va effectuer de tenseurs  sur cette image nous devons donc insérer cette image dans notre réseau  pour la faire convertir l’image en un tableau on applique le preproccing on prédite l’angle de braquage a partir de notre modèle  si la vitesse est maximale on la change  et elle devient  une vitesse minimale  donc ca veut dire on veut ralentir et  si c’est pas le cas on va dire ici qu’on veut pas dépasser la vitesse maximale.

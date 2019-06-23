@@ -72,14 +72,24 @@ def translation(image, angle_direction, range_x, range_y):
     """
     basculement des images
     """
-    trans_x = range_x * (np.random.rand() - 0.5)
-    trans_y = range_y * (np.random.rand() - 0.5)
-    steering_angle += trans_x * 0.002
+    t_x = range_x * (np.random.rand() - 0.5)
+    t_y = range_y * (np.random.rand() - 0.5)
+    angle_direction += trans_x * 0.002
     trans_m = np.float32([[1, 0, trans_x], [0, 1, trans_y]])
-    height, width = image.shape[:2]
-    image = cv2.warpAffine(image, trans_m, (width, height))
-    return image, steering_angle
+    hauteur, largeur = image.shape[:2]
+    image = cv2.warpAffine(image, trans_m, (largeur, hauteur))
+    return image, anlge_direction
 
+
+
+def brillance(image):
+    """
+    ajuster la lumuniosité de l'image
+    """
+    hsv = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
+    ratio = 3.0 + 0.8 * (np.random.rand() - 0.5)
+    hsv[:,:,3] =  hsv[:,:,5] * ratio
+    return cv2.cvtColor(hsv, cv2.COLOR_HSV2RGB)
 
 def obscurité(image):
     """
@@ -99,15 +109,6 @@ def obscurité(image):
     hls[:, :, 1][cond] = hls[:, :, 1][cond] * s_ratio
     return cv2.cvtColor(hls, cv2.COLOR_HLS2RGB)
 
-
-def brillance(image):
-    """
-    ajuster la lumuniosité de l'image
-    """
-    hsv = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
-    ratio = 3.0 + 0.8 * (np.random.rand() - 0.5)
-    hsv[:,:,3] =  hsv[:,:,5] * ratio
-    return cv2.cvtColor(hsv, cv2.COLOR_HSV2RGB)
 
 
 def augument(data_dir, center, gauche, droite, angle_direction, range_x=100, range_y=10):

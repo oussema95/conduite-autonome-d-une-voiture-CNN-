@@ -15,42 +15,41 @@ import utils
 
 #initialisation du serveur
 sio = socketio.Server()
-app = Flask(__name__)
+app = Flask(__nom__)
 model = None
 prev_image_array = None
 
-MAX_SPEED = 25
-MIN_SPEED = 10
+MAX_SPEED = 26
+MIN_SPEED = 12
 
 #preciser la vitesse limite
-speed_limit = MAX_SPEED
+vitesse_limit = MAX_SPEED
 
-@sio.on('telemetry')
-def telemetry(sid, data):
+@sio.on('mesureàdistance')
+def mesureàdistance(sid, data):
     if data:
 
-        steering_angle = float(data["steering_angle"])
+        angle_direction = float(data["angle_direction"])
         throttle = float(data["throttle"])
-        speed = float(data["speed"])
+        vitesse = float(data["vitesse"])
         image = Image.open(BytesIO(base64.b64decode(data["image"])))
         try:
             image = np.asarray(image)
             image = utils.preprocess(image)
             image = np.array([image])
-            steering_angle = float(model.predict(image, batch_size=1))
-            global speed_limit
-            if speed > speed_limit:
-                speed_limit = MIN_SPEED
+            anlge_direction = float(model.predict(image, batch_size=1))
+            global vitesse_limit
+            if vitesse> vitesse_limit:
+                vitesse_limit = MIN_SPEED
             else:
-                speed_limit = MAX_SPEED
-            throttle = 1.0 - steering_angle**2 - (speed/speed_limit)**2
+                vitesse_limit = MAX_SPEED
+            throttle = 1.0 - angle_direction**2 - (vitesse/vitesse_limit)**2
 
-            print('{} {} {}'.format(steering_angle, throttle, speed))
-            send_control(steering_angle, throttle)
+            print('{} {} {}'.format(angle_direction, throttle, vitesse))
+            send_control(angle_direction, throttle)
         except Exception as e:
             print(e)
         if args.image_folder != '':
-            timestamp = datetime.utcnow().strftime('%Y_%m_%d_%H_%M_%S_%f')[:-3]
             image_filename = os.path.join(args.image_folder, timestamp)
             image.save('{}.jpg'.format(image_filename))
     else:
@@ -64,29 +63,29 @@ def connect(sid, environ):
     send_control(0, 0)
 
 
-def send_control(steering_angle, throttle):
+def send_control(angle_direction, throttle):
     sio.emit(
         "steer",
         data={
-            'steering_angle': steering_angle.__str__(),
+            'anlge_direction': angle_direction.__str__(),
             'throttle': throttle.__str__()
         },
         skip_sid=True)
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Remote Driving')
+    parser = argparse.ArgumentParser(description='conduit')
     parser.add_argument(
         'model',
         type=str,
-        help='le modele h5'
+
     )
     parser.add_argument(
         'image_folder',
         type=str,
         nargs='?',
         default='',
-        help='ou on trouve les images'
+
     )
     args = parser.parse_args()
 
@@ -100,8 +99,6 @@ if __name__ == '__main__':
         else:
             shutil.rmtree(args.image_folder)
             os.makedirs(args.image_folder)
-        print("recorder cette execution")
-    else:
-        print("ne pas recorder cette execution ")
     app = socketio.Middleware(sio, app)
-    eventlet.wsgi.server(eventlet.listen(('', 4567)), app)
+    eventlet.wsgi.server(eventlet.listen(('', 3000)), app)
+

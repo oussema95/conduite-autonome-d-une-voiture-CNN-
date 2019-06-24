@@ -7,9 +7,9 @@ on trouve aussi dans la repository  le fichier read.md qui explique comment on d
 
 preproccessing-augmentation-image.py
 
-construction-formation-modele.py
+construction-trainer-modele.py
 
-test du modele .py
+testdumodele.py
 
 README.md
 
@@ -22,13 +22,13 @@ driving_log.csv
 L’idée ici c’est d’exécuter le modèle pré-entrainé, donc on démarre le simulateur de conduite automatique audacity et on fait le choix d’une  scène et on  appuie  sur le bouton Mode autonome. Ensuite, on  exécute le modèle comme suit:
 
 
-Python  drive.py model.h5
+python  testdumodele.py model.h5
 
 
 Avec model.h5 c’est le fichier qui contient   notre  réseau de neurones de convolution formés.
 On a besoin bien sur du dossier qui contient les images d’apprentissage 
 
-Python model.py 
+python construction-tainer-modele.py
 
 
  et cela générera un fichier à model-<epoch>.h5

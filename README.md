@@ -1,8 +1,8 @@
 # conduite-autonome-d-une-voiture-CNN-
 l’idée c'est  de construire une intelligence artificielle (un modèle) le former  et après on va tester ce modèle  afin  de simuler une voiture dans le mode autonome d'AUDACITY
 # 1)	Description des fichiers et répertoires de la repository
-dans la repository on trouve le fichier preproccessing-augmentation-image dans lequel on trouve  les differentes manipulations qu"on a fait afin de generer une image augmenté à la fin avec une angle de braquage bien ajustée et on trouve le  fichier python construction-formation-modele.py dans lequel on trouve  le code du construction du modele  basé  sur les reseaux de neurones convolutifs  et on trouve comment  on forme le modele afin de l'utiliser apres dans la simulation .
-on trouve aussi le fichier python test du modele dans lequel on va charger le modele et on va etablir  une communication entre le serveur (le simulateur) et  les clients (les scripts construction-formation-modele et test du modele .
+dans la repository on trouve le fichier preproccessing-augmentation-image dans lequel on trouve  les differentes manipulations qu'on a fait afin de generer une image augmenté à la fin avec une angle de direction bien ajustée et on trouve le  fichier python construction-tainer-modele.py dans lequel on trouve  le code du construction du modele  basé  sur les reseaux de neurones convolutifs  et on trouve comment  on forme le modele afin de l'utiliser apres dans la simulation .
+on trouve aussi le fichier python testdumodele dans lequel on va charger le modele et on va etablir  une communication entre le serveur (le simulateur) et  les clients (les scripts construction-trainer-modele et testdumodele .
 on trouve aussi dans la repository  le fichier read.md qui explique comment on demarre la simulation , aussi  precise  les algorithmes les bibliotheques utilisées au cours du projet et bien sur on trouve aussi la description des fichiers crees et le repertoire de la repository .
 
 preproccessing-augmentation-image.py
@@ -33,7 +33,7 @@ python construction-trainer-modele.py
 
 
  et cela générera un fichier à model.h5
-Le script drive.py c’est le script de test pour conduire la voiture en mode autonome   qui représente le client et le  simulateur représente  le serveur et ce script  prend en charge un flux constant d'images, les manipule (redimensionnement et découpage) dans la forme d'entrée du modèle, puis transmet la matrice d'images transformées au modèle, qui fait la prédiction d’un angle de braquage approprié en fonction de l'image. L'angle de braquage est ensuite transmis à la voiture en tant que commande et la voiture se guide en conséquence. La voiture  autonome parcourt ainsi le parcours en émettant constamment des images et en recevant les angles de braquage. On espère bien sur que le modèle aura été suffisamment entraîné pour que les angles de direction qu’il reçoit permettent au véhicule de rouler en toute sécurité au milieu de la voie et de ne pas dériver sur la route ou faire autre chose qui serait considéré dangereux.
+Le script testdumodele.py c’est le script de test pour conduire la voiture en mode autonome   qui représente le client et le  simulateur représente  le serveur et ce script  prend en charge un flux constant d'images, les manipule (redimensionnement et découpage) dans la forme d'entrée du modèle, puis transmet la matrice d'images transformées au modèle, qui fait la prédiction d’un angle de braquage approprié en fonction de l'image. L'angle de braquage est ensuite transmis à la voiture en tant que commande et la voiture se guide en conséquence. La voiture  autonome parcourt ainsi le parcours en émettant constamment des images et en recevant les angles de braquage. On espère bien sur que le modèle aura été suffisamment entraîné pour que les angles de direction qu’il reçoit permettent au véhicule de rouler en toute sécurité au milieu de la voie et de ne pas dériver sur la route ou faire autre chose qui serait considéré dangereux.
 
 
 
@@ -70,7 +70,7 @@ Et à la fin on retourne le modèle  donc ca va être comme un triangle  en term
  Le black box  de neural network   on ne connait pas ou  une feature commence  et  ou une autre se termine  de son emplacement  dans cette abstraction mais on sait qu’il ya une certaine  connectivité.
  la figure 2 presente le systeme des couches  qu'on les trouve dans le modele CNN .
 ![alt text](https://github.com/oussema95/conduite-autonome-d-une-voiture-CNN-/blob/master/machine.PNG)
-# Algorithme de Formation du modèle : 
+# Algorithme de training du modèle : 
 On définit  le modèle  et on l’enregistre  dans un check point il va  être modélisé donc on va dire mode automatique après on veut dire qu’on veut enregistrer le meilleur modèle.
 Aussi  on ajoute la fonction du quadratique  erreur  qui va  donner une prédictive angle de braquage et puis on a une réelle   angle de braquage du simulateur non-autonome et on veut trouver une différence entre les deux  donc  on mets  la différence aux carrés et  et puis on somme  les différences après on divise par leur nombre on utilise  après l’optimiseur d’atomes  qui est la descente du gradient  après la compilation on peut générer des données. On utilise le générateur d’ajustement real time  data argumentation sur les images sur le cpu en parallèle.
 => On génère des lots de données à partir de nos données de formation.
